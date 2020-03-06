@@ -1,0 +1,89 @@
+<!--
+    Simple clock wallpaper
+    
+    by vk.com/lxstify
+-->
+
+<html>
+
+    <head>
+        <title>clock</title>
+    </head>
+
+    <style>
+        @font-face {
+            font-family: "Montserrat";
+            src: url("montserrat.ttf");
+        }
+
+        body {
+            background-color: black;
+            margin: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .time-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .time {
+            color: white;
+            font-family: 'Montserrat';
+            font-size: 10vh;
+            text-align: center;
+            margin: auto;
+
+            line-height: 7vh;
+        } 
+
+        #date {
+            font-size: 4vh;
+        }
+    </style>
+
+    <body>
+
+        <div class="time-container">
+            <div class="time">
+
+                <a id="clock"></a>
+                <br>
+                <a id="date"></a>
+    
+            </div>
+        </div>
+        
+    </body>
+
+    <script>
+        function getTime() {
+            let now = new Date()
+            let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+            hour = now.getHours()
+            min = now.getMinutes()
+            sec = now.getSeconds()
+            day = now.getDay()
+
+            let time = `${(hour < 10 ? ("0" + hour) : hour)}:${(min < 10 ? ("0" + min) : min)}:${(sec < 10 ? ("0" + sec) : sec)}`
+            let date = `${now.getDate()}/${now.getMonth() + 1} ${days[day]}`
+
+            return [time, date]
+        }
+
+       window.onload = () => {
+            document.getElementById("clock").innerHTML = getTime()[0];
+            document.getElementById("date").innerHTML = getTime()[1];
+
+            setInterval(() => {
+                document.getElementById("clock").innerHTML = getTime()[0];
+                document.getElementById("date").innerHTML = getTime()[1];
+            }, 150)
+        }
+    </script>
+</html>
